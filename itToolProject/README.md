@@ -10,3 +10,6 @@
 ## Notes:
 	Do not rename the PY as "systemInfo", this can create a devasting bug.
 	No new bugs have been seen.
+
+## Python to EXE Tool	
+	$ python -m auto_py_to_exe

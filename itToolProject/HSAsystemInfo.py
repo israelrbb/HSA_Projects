@@ -19,6 +19,7 @@ def main():
     canvas = tk.Canvas(window, height=400, width=900, bg="#263D42")                                       # Expand our GUI and give it a background color
     canvas.create_text(350, 40, text= "    HSA IT", fill="white", font=('Helvetica 15 bold'), anchor='w') # Title text within GUI
     window.title("HSA IT")
+    window.resizable(False, False) # Block full screen mode for it can cause our UI to look funky
     canvas.pack()    # Load our canvas into gui
 
     ########################################
