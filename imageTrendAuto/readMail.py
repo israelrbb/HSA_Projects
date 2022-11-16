@@ -2,7 +2,7 @@ import win32com
 from win32com.client import constants
 from win32com.client.gencache import EnsureDispatch as Dispatch
 import time
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import re
 import schedule 
 import threading
@@ -19,9 +19,25 @@ def main():
                 #try:
                 for attachment in message.Attachments:
                     if attachment not in filesExplored:
+                        # Record file already explored
                         filesExplored.append(attachment)
-                        print(f"Email: {message.subject}")
-                        print(f"File attachment: {attachment}")
+                        # Current file time
+                        fileTime = str(message.SentOn)
+                        fileTime = fileTime.split()[0]
+                        # Get current time
+                        currentTime = date.today()
+                        # Get one week span form today
+                        lastweekTime = datetime.today() - timedelta(weeks=1)
+                        lastweekTime = str(lastweekTime)
+                        lastweekTime = lastweekTime.split()[0]
+                        # We only want files in the newest span cycle
+                        if fileTime <= lastweekTime and fileTime:
+                            print(f"Email: {message.subject}")
+                            print(f"File attachment: {attachment}")
+                            print(f"Sent on: {fileTime}")
+                            print(f"Current time today: {currentTime}")
+                            print(f"Last week time: {lastweekTime}\n")
+
                     else:
                         continue
 
