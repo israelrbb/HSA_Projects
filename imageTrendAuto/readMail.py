@@ -5,8 +5,6 @@ import os
 from datetime import datetime, timedelta
 import re
 
-
-
 def main():
     outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI") # Open up the outlook application and its properties
     inbox = outlook.GetDefaultFolder(6)                                            # Open up the inbox folder (6)
@@ -23,7 +21,7 @@ def main():
                         fileTime = str(message.SentOn)
                         fileTime = fileTime.split()[0]
                         # Get one week span form today
-                        lastweekTime = datetime.today() - timedelta(days=2)
+                        lastweekTime = datetime.today() - timedelta(weeks=1)
                         lastweekTime = str(lastweekTime)
                         lastweekTime = lastweekTime.split()[0]
                         # We only want files in the newest span cycle
