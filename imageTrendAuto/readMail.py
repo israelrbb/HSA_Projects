@@ -2,8 +2,9 @@ import win32com
 from win32com.client import constants
 from win32com.client.gencache import EnsureDispatch as Dispatch
 import os
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 import re
+
 
 
 def main():
@@ -52,23 +53,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-#############################################
-# IF WE WANT IT TO RUN AT SCHEDULE SOLO TIMES
-#############################################
-# def run_continuously():
-#     cease_continuous_run = threading.Event()
-#     class ScheduleThread(threading.Thread):
-#         @classmethod
-#         def run(cls):
-#             while not cease_continuous_run.is_set():
-#                 schedule.run_pending()
-#     continuous_thread = ScheduleThread()
-#     continuous_thread.start()
-#     return cease_continuous_run
-
-# if __name__ == "__main__":
-#     schedule.every().second.do(main)
-#     stop_run_continuously = run_continuously()
-#     #time.sleep(5)
-#     #stop_run_continuously.set()
