@@ -11,6 +11,7 @@ def main():
     messages = inbox.Items                                                         # Set a var to environment
     filesExplored = []                                                             # List of files we explored
     outputDir = r"C:/Users/esquivr/Desktop/Apps/imageTrendAuto/csvFIles"
+    tooManyTimes = 0
     try:
         for message in list(messages): # Go through the messages in our inbox
             string = message.subject  # Get the subject line of a email
@@ -40,8 +41,11 @@ def main():
                                         print("error when saving the attachment:" + str(error))
                                 else:
                                     continue
-                        #else:
-                            #continue
+                        else:
+                            tooManyTimes+=1
+                            if tooManyTimes > 10:
+                                break
+                            continue
                     except Exception as e:
                         print("error when processing emails messages:" + str(error))
     except Exception as e:
