@@ -146,6 +146,8 @@ class GUI(Tk):
 if __name__ == "__main__":
     Launch=GUI() # intiliaze the tk class
     Launch.state("zoomed")
+    Launch.title("HSA IT Self Service Tool")
+    Launch.wm_iconbitmap("C:/Users/esquivr/Desktop/Apps/hsaGUI/Santa_Cruz_County_Seal.ico")
     # Load in the default layer, user control flow is handled by the class itself
     Launch.TopBar() # Load in top bar
     Launch.QuickBar() # Load in quick menu
