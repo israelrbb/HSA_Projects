@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-# Making a class for fun
+# Class for better structure and future reorganization ease
 class GUI(Tk):
     def __init__(self):
         # Class constructor
@@ -39,7 +39,7 @@ class GUI(Tk):
         self.fileb.pack(fill="x", padx=5,pady=10)
     
     ###################################################################################################  
-    # Baes UI for now it is just titles, SHOULD BE CHANGED SOON
+    # Base UI for now it is just titles, SHOULD BE CHANGED SOON
     ###################################################################################################  
     def TicketUI(self):
         # Controls UI for Sumbit a Ticket
