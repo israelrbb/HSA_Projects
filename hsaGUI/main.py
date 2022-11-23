@@ -9,9 +9,13 @@ class GUI(Tk):
         super().__init__()
         self.mainFrame = Frame(self, bg="white") # Build off of our main frame so make it accessible to all
         self.mainFrame.pack(fill="both", expand=True)
+        # Switch gate variables
         self.pathuiActivated = False
         self.ticketuiActivated = False
         self.fileuiActivated = False
+    ###################################################################################################    
+    # Functions to load in static elements that should never change because they comprise base look
+    ###################################################################################################  
     def TopBar(self):
         # Top frame and label of app
         self.topFrame = Frame(self.mainFrame, bg="#EDAF52")
@@ -33,6 +37,10 @@ class GUI(Tk):
         self.pathp.pack(fill="x", padx=5,pady=10)
         self.fileb = Button(self.quickFrame,text="File Backup", command= lambda: self.switchtoFileUI())
         self.fileb.pack(fill="x", padx=5,pady=10)
+    
+    ###################################################################################################  
+    # Baes UI for now it is just titles, SHOULD BE CHANGED SOON
+    ###################################################################################################  
     def TicketUI(self):
         # Controls UI for Sumbit a Ticket
         self.ticketFrame = Frame(self.mainFrame, bg="white")
@@ -46,11 +54,15 @@ class GUI(Tk):
         self.pathLabel.pack(side = LEFT, padx=160)
         self.pathFrame.pack(fill="x")
     def FileUI(self):
-        # Controls UI for Path Printer
+        # Controls UI for File Backup
         self.fileFrame = Frame(self.mainFrame, bg="white")
         self.fileLabel = Label(self.fileFrame, text="File Backup",font= "Sitara 25 bold", bg="white")
         self.fileLabel.pack(side = LEFT, padx=160)
         self.fileFrame.pack(fill="x")
+
+    ###################################################################################################  
+    # Our Action Centers
+    ###################################################################################################  
     def ActionCenterTicket(self):
         # Set elements!
         self.actionticketFrame = Frame(self.mainFrame, bg="black")#width=1400, height=800)
@@ -70,6 +82,10 @@ class GUI(Tk):
     def ActionCenterFile(self):
         self.actionfileFrame = Frame(self.mainFrame, bg="gray")#width=1400, height=800)
         self.actionfileFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=10)
+
+    ###################################################################################################  
+    # Functions to hide UI elements
+    ###################################################################################################  
     def hideTicketUI(self):
         self.ticketLabel.pack_forget()
         self.ticketFrame.pack_forget()
@@ -85,6 +101,10 @@ class GUI(Tk):
         self.fileLabel.pack_forget()
         self.fileFrame.pack_forget()
         self.actionfileFrame.pack_forget()
+
+    ###################################################################################################  
+    # Functions to control the switch of Action Centers accordingly
+    ###################################################################################################  
     def switchtoPathUI(self):
         # Switching to path UI should hide other UI aspects
         if self.pathuiActivated == False: # switch gate to prevent overload
@@ -120,6 +140,9 @@ class GUI(Tk):
             self.ticketuiActivated = False
             self.pathuiActivated = False
 
+###################################################################################################  
+# Run the program
+###################################################################################################  
 if __name__ == "__main__":
     Launch=GUI() # intiliaze the tk class
     Launch.state("zoomed")
