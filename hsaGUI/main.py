@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from PIL import Image, ImageTk
+import utils as ut
 
 # Class for better structure and future reorganization ease
 class GUI(Tk):
@@ -19,24 +21,39 @@ class GUI(Tk):
     def TopBar(self):
         # Top frame and label of app
         self.topFrame = Frame(self.mainFrame, bg="#EDAF52")
-        self.topLabel = Label(self.topFrame, text="HSA IT Self Service Tool", bg="#FD9800", fg="white", font="Sitara 35 bold")
-        self.topLabel.pack(padx=30,pady=30)
+        self.title_img = Image.open("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/title.png")#PhotoImage(file="C:/Users/esquivr/Desktop/Apps/hsaGUI/images/satButton.png")
+        self.title_image = ImageTk.PhotoImage(self.title_img)
+        self.topLabel = Label(self.topFrame, image=self.title_image, borderwidth=0, background="#EDAF52")#text="HSA IT Self Service Tool", bg="#FD9800", fg="white", font="Sitara 35 bold")
+        self.topLabel.pack(padx=10,pady=10)
         self.topFrame.pack(fill="x")
     def QuickBar(self):
         # Quick frame and options
         self.quickFrame = Frame(self.mainFrame, bg="#0A6B60")
-        self.quickLabel = Label(self.quickFrame, text="Quick Menu", bg="#0A6B60", fg="white", font="Sitara 18")
-        self.quickLabel.pack(padx=40,pady=40)
+        self.quick_img = Image.open("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/quickbarTitle.png")
+        self.quick_image = ImageTk.PhotoImage(self.quick_img)
+        self.quickLabel = Label(self.quickFrame, image= self.quick_image, borderwidth=0, background="#0A6B60")#text="Quick Menu", bg="#0A6B60", fg="white", font="Sitara 20")
+        self.quickLabel.pack(fill="x", padx=5,pady=5)
         self.quickFrame.pack(side = LEFT,fill="y")
-        self.sat = Button(self.quickFrame, text="Submit a Ticket", command= lambda: self.switchtoTicketUI())
+
+        self.sat = Button(self.quickFrame, text="Submit a Ticket", background="#0A6B60",borderwidth=0,command= lambda: self.switchtoTicketUI())
         # Create button image with text on it already and add it to this directory and simply just place
-        # self.img = PhotoImage(file="C:/Users/esquivr/Desktop/Apps/hsaGUI/button.png")
-        # self.sat.config(image=self.img)
-        self.sat.pack(fill="x", padx=5,pady=10)
-        self.pathp = Button(self.quickFrame,text="Path Printer", command= lambda: self.switchtoPathUI())
-        self.pathp.pack(fill="x", padx=5,pady=10)
-        self.fileb = Button(self.quickFrame,text="File Backup", command= lambda: self.switchtoFileUI())
-        self.fileb.pack(fill="x", padx=5,pady=10)
+        self.img = Image.open("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/satButton.png")#PhotoImage(file="C:/Users/esquivr/Desktop/Apps/hsaGUI/images/satButton.png")
+        self.sat_image = ImageTk.PhotoImage(self.img)
+        self.sat.config(image=self.sat_image)
+        self.sat.pack(padx=5,pady=15)
+
+        self.fileb = Button(self.quickFrame,text="File Backup", background="#0A6B60",borderwidth=0,command= lambda: self.switchtoFileUI())
+        self.fb_img = Image.open("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/fbButton.png")#PhotoImage(file="C:/Users/esquivr/Desktop/Apps/hsaGUI/images/satButton.png")
+        self.fb_image = ImageTk.PhotoImage(self.fb_img)
+        self.fileb.config(image=self.fb_image)
+        self.fileb.pack(padx=5,pady=15)
+
+        self.pathp = Button(self.quickFrame,text="Path Printer", background="#0A6B60",borderwidth=0, command= lambda: self.switchtoPathUI())
+        self.pp_img = Image.open("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/ppButton.png")#PhotoImage(file="C:/Users/esquivr/Desktop/Apps/hsaGUI/images/satButton.png")
+        self.pathp_image = ImageTk.PhotoImage(self.pp_img)
+        self.pathp.config(image=self.pathp_image)
+        self.pathp.pack(padx=5,pady=15)
+
     
     ###################################################################################################  
     # Base UI for now it is just titles, SHOULD BE CHANGED SOON
@@ -66,13 +83,14 @@ class GUI(Tk):
     def ActionCenterTicket(self):
         # Set elements!
         self.actionticketFrame = Frame(self.mainFrame, bg="black")#width=1400, height=800)
+        ut.Shadow(self.actionticketFrame, size=10)#, #offset_x=10, offset_y=10)
         #self.actionticketGeneral = Label(self.actionticketFrame, text="General")
         #self.actionticketGeneral.grid(row=0, column=0)
         self.ticketmenu = LabelFrame(self.actionticketFrame)
         self.ticketcanvas = Canvas(self.ticketmenu)
         self.ticketmenuscroll = Scrollbar(self.ticketmenu, orient="vertical", command=self.ticketcanvas.yview)
         # Pack UI elements!
-        self.actionticketFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=10)
+        self.actionticketFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=(5,30))
         self.ticketmenu.pack(fill="both", padx=5, pady=5, expand=True)
         self.ticketcanvas.pack(side=LEFT)
         self.ticketmenuscroll.pack(side=RIGHT, fill="y")
@@ -147,11 +165,11 @@ if __name__ == "__main__":
     Launch=GUI() # intiliaze the tk class
     Launch.state("zoomed")
     Launch.title("HSA IT Self Service Tool")
-    Launch.wm_iconbitmap("C:/Users/esquivr/Desktop/Apps/hsaGUI/Santa_Cruz_County_Seal.ico")
+    Launch.wm_iconbitmap("C:/Users/esquivr/Desktop/Apps/hsaGUI/images/Santa_Cruz_County_Seal.ico")
     # Load in the default layer, user control flow is handled by the class itself
     Launch.TopBar() # Load in top bar
     Launch.QuickBar() # Load in quick menu
-    Launch.TicketUI()
+    Launch.TicketUI() # This will be the default start page to load 
     Launch.ticketuiActivated = True # Since ticket UI is default make sure switch gate is set to true
     Launch.ActionCenterTicket()
     Launch.mainloop() # Run the program using tkinter func
