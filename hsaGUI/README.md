@@ -1,7 +1,8 @@
 # HSA IT Application
     A IT Application for HSA clients in need of help 
 ## Description:
-    Tkinter application that make the IT life easier and customer experience to be smoother
+    Tkinter application that makes the IT life easier and customer experience to be smoother.
+    Users will launch this application for improved means of receiving help with our HSA team.
 
 ## Usage:
 	Currently in production, but ideal usage would be launching a exe file that opens up this application.
