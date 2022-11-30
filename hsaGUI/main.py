@@ -83,23 +83,78 @@ class GUI(Tk):
     def ActionCenterTicket(self):
         # Set elements!
         self.actionticketFrame = Frame(self.mainFrame, bg="black")#width=1400, height=800)
-        ut.Shadow(self.actionticketFrame, size=10)#, #offset_x=10, offset_y=10)
+        self.actionticketFrameShadow = ut.Shadow(self.actionticketFrame, size=5)#, #offset_x=10, offset_y=10)
+        self.ticketmenu = LabelFrame(self.actionticketFrame, background="white")
         #self.actionticketGeneral = Label(self.actionticketFrame, text="General")
         #self.actionticketGeneral.grid(row=0, column=0)
-        self.ticketmenu = LabelFrame(self.actionticketFrame)
-        self.ticketcanvas = Canvas(self.ticketmenu)
-        self.ticketmenuscroll = Scrollbar(self.ticketmenu, orient="vertical", command=self.ticketcanvas.yview)
+        #self.ticketcanvas = Canvas(self.ticketmenu)
+        #self.ticketmenuscroll = Scrollbar(self.ticketmenu, orient="vertical", command=self.ticketcanvas.yview)
+
+        self.name_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.namelabel = Label(self.name_frame,text="Name:", font= "Sitara 12")
+        self.name = Entry(self.name_frame,highlightbackground="black", highlightthickness=1)
+
+        self.email_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.emaillabel = Label(self.email_frame,text="Email:", font= "Sitara 12")
+        self.email = Entry(self.email_frame,highlightbackground="black", highlightthickness=1)
+
+        self.contactnumber_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.contactnumberlabel = Label(self.contactnumber_frame,text="Contact Number:", font= "Sitara 12")
+        self.contactnumber = Entry(self.contactnumber_frame,highlightbackground="black", highlightthickness=1)
+
+        self.cc_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.cclabel = Label(self.cc_frame,text="CC's:", font= "Sitara 12")
+        self.cc = Entry(self.cc_frame,highlightbackground="black", highlightthickness=1)
+
+        self.department_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.departmentlabel = Label(self.department_frame,text="Department:", font= "Sitara 12")
+        self.department = Entry(self.department_frame,highlightbackground="black", highlightthickness=1)
+
+        self.location_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.locationlabel = Label(self.location_frame,text="Location:", font= "Sitara 12")
+        self.location = Entry(self.location_frame,highlightbackground="black", highlightthickness=1)
+
+        self.description_frame = Frame(self.ticketmenu, highlightbackground="#0A6B60", highlightthickness=2)
+        self.descriptionlabel = Label(self.description_frame,text="Description:", font= "Sitara 12")
+        self.description = Text(self.description_frame,highlightbackground="black", highlightthickness=1)
+
+        self.sumbit_ticket_button = Button(self.ticketmenu, text="Sumbit Ticket", command= lambda: self.switchtoSumbittedTicketUI())
+
         # Pack UI elements!
-        self.actionticketFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=(5,30))
+        self.actionticketFrame.pack(side=TOP ,fill="both", padx=160, pady=(5,30), expand=True)
         self.ticketmenu.pack(fill="both", padx=5, pady=5, expand=True)
-        self.ticketcanvas.pack(side=LEFT)
-        self.ticketmenuscroll.pack(side=RIGHT, fill="y")
+
+        # Pack text boxes!
+        self.name_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.namelabel.pack(side=LEFT, padx=35)
+        self.name.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.email_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.emaillabel.pack(side=LEFT, padx=36.5)
+        self.email.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.contactnumber_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.contactnumberlabel.pack(side=LEFT)
+        self.contactnumber.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.cc_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.cclabel.pack(side=LEFT, padx=37)
+        self.cc.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.department_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.departmentlabel.pack(side=LEFT, padx=14)
+        self.department.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.location_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.locationlabel.pack(side=LEFT, padx=24)
+        self.location.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=5)
+        self.description_frame.pack(fill="x", padx=2, pady=2, expand=True)
+        self.descriptionlabel.pack(side=LEFT, padx=14)
+        self.description.pack(side=LEFT, expand=True, fill="x", padx=10, pady=10, ipady=10)
+        self.sumbit_ticket_button.pack(side=BOTTOM)
+        #self.ticketcanvas.pack(side=LEFT)
+        #self.ticketmenuscroll.pack(side=RIGHT, fill="y")
     def ActionCenterPath(self):
         self.actionpathFrame = Frame(self.mainFrame, bg="gray")#width=1400, height=800)
-        self.actionpathFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=10)
+        self.actionpathFrame.pack(side=TOP ,fill="both", padx=160, pady=(5,30), expand=True)
     def ActionCenterFile(self):
         self.actionfileFrame = Frame(self.mainFrame, bg="gray")#width=1400, height=800)
-        self.actionfileFrame.pack(side=TOP ,fill="both", padx=160, expand=True, pady=10)
+        self.actionfileFrame.pack(side=TOP ,fill="both", padx=160, pady=(5,30), expand=True)
 
     ###################################################################################################  
     # Functions to hide UI elements
@@ -109,8 +164,8 @@ class GUI(Tk):
         self.ticketFrame.pack_forget()
         self.actionticketFrame.pack_forget()
         self.ticketmenu.pack_forget()
-        self.ticketcanvas.pack_forget()
-        self.ticketmenuscroll.pack_forget()
+        #self.ticketcanvas.pack_forget()
+        #self.ticketmenuscroll.pack_forget()
     def hidePathUI(self):
         self.pathLabel.pack_forget()
         self.pathFrame.pack_forget()
@@ -157,6 +212,9 @@ class GUI(Tk):
             self.fileuiActivated = True
             self.ticketuiActivated = False
             self.pathuiActivated = False
+    def switchtoSumbittedTicketUI(self):
+        #assure user ticket has been sumbitted
+        print("in production")
 
 ###################################################################################################  
 # Run the program
