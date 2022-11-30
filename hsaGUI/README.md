@@ -11,6 +11,7 @@
     -main.py Deals with intial launch and UI handling of our app
     -utils.py Contains helper functions for main.py not to overload our main file
     -/images Folder with images used within the main program to display UI elements 
+    -/currVersionImage Folder with sample images of how the APP looks like at a specific state
 
 ## Python to EXE Tool	
 	$ python -m auto_py_to_exe
