@@ -61,7 +61,7 @@ class GUI(Tk):
     def TicketUI(self):
         # Controls UI for Sumbit a Ticket
         self.ticketFrame = Frame(self.mainFrame, bg="white")
-        self.ticketLabel = Label(self.ticketFrame, text="Sumbit a Ticket",font= "Sitara 25 bold", bg="white")
+        self.ticketLabel = Label(self.ticketFrame, text="Submit a Ticket",font= "Sitara 25 bold", bg="white")
         self.ticketLabel.pack(side = LEFT, padx=160)
         self.ticketFrame.pack(fill="x")
     def PathUI(self):
@@ -118,7 +118,7 @@ class GUI(Tk):
         self.descriptionlabel = Label(self.description_frame,text="Description:", font= "Sitara 12")
         self.description = Text(self.description_frame,highlightbackground="black", highlightthickness=1)
 
-        self.sumbit_ticket_button = Button(self.ticketmenu, text="Sumbit Ticket", command= lambda: self.switchtoSumbittedTicketUI())
+        self.sumbit_ticket_button = Button(self.ticketmenu, text="Submit Ticket", command= lambda: self.switchtoSumbittedTicketUI())
 
         # Pack UI elements!
         self.actionticketFrame.pack(side=TOP ,fill="both", padx=160, pady=(5,30), expand=True)
