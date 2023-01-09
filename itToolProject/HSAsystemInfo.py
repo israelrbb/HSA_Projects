@@ -5,6 +5,7 @@ import pyperclip      # Copying to clipboard
 import socket         # Used to get IP 
 import os             # Command prompt calling and clipping
 from PIL import ImageTk, Image 
+import sys
                                         
 ########################################
 # Copy to text to clipboard
@@ -12,25 +13,33 @@ from PIL import ImageTk, Image
 def onclick(text):
     pyperclip.copy(text)
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 def main():
     ########################################
     # Main frame
     ########################################
     window = tk.Tk() # Body to hold GUI 
-    canvas = tk.Canvas(window, height=250, width=500, bg="#A2CD5A")                                       # Expand our GUI and give it a background color
+    canvas = tk.Canvas(window, height=250, width=500, bg="#BFEFFF")                                       # Expand our GUI and give it a background color
     canvas.create_text(155, 30, text= "System Information", fill="Black", font=('Helvetica 15 bold'), anchor='w') # Title text within GUI
     canvas.create_text(180, 50, text= "(Click item to copy)", fill="Black", font=('Helvetica 9'), anchor='w') # Title text within GUI
     canvas.create_text(10, 225, text= "Santa Cruz County \nHealth Services Agency", fill="Black", font=('Helvetica 10 bold'), anchor='w') #lower level writing
     canvas.create_text(200, 200, text= "HSA IT Tools", fill="Black", font=('Helvetica 11 bold'), anchor='w') # lower level wrtiting
     canvas.create_line(5, 60, 500, 60)
-    ### image###
-    #image1 = Image.open("") # need to add image to proceed
-    #image1 = image1.resize((45, 45), Image.ANTIALIAS)
-    #test = ImageTk.PhotoImage(image1)
-    #label1 = tk.Label(image=test)
-    #label1.place(x=8, y=8)
-
-    window.title("HSA-IT Support Info ")
+    ### images###
+    image = Image.open(resource_path("Santa_Cruz_County_Seal.png")).convert("RGBA")
+    image = image.resize((45, 45), Image.ANTIALIAS)
+    tk_image = ImageTk.PhotoImage(image)
+    canvas.create_image(8, 8, image=tk_image, anchor="nw")
+    #icon
+    window.iconbitmap(resource_path("Santa_Cruz_County_Seal.ico"))
+    
+    window.title("HSA-IT My PC Info")
     window.resizable(False, False) # Block full screen mode for it can cause our UI to look funky
     canvas.pack()    # Load our canvas into gui
     
@@ -47,8 +56,6 @@ def main():
     button.pack()
 
     ######################
-  
-    
    
     ########################################
     # Bottom left box
