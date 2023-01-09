@@ -12,5 +12,7 @@
 
 ## Python to EXE Tool	
 	$ python -m auto_py_to_exe
+	or to include the images
+	pyinstaller --onefile --windowed --add-data "Santa_Cruz_County_Seal.ico;." --add-data "Santa_Cruz_County_Seal.png;." myinfoapp.py
 
 ##![capture](https://user-images.githubusercontent.com/92654141/211185298-0614a89a-aec3-4ce0-a533-d29eb1fba7d8.png)
