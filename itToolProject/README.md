@@ -15,4 +15,4 @@
 	or to include the images
 	pyinstaller --onefile --windowed --add-data "Santa_Cruz_County_Seal.ico;." --add-data "Santa_Cruz_County_Seal.png;." myinfoapp.py
 
-##![capture](https://user-images.githubusercontent.com/92654141/211185298-0614a89a-aec3-4ce0-a533-d29eb1fba7d8.png)
+<img width="378" alt="Myinfoapp" src="https://user-images.githubusercontent.com/92654141/211412900-69d87072-ce0d-45ee-b018-5f79cdc74987.PNG">
