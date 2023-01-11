@@ -6,6 +6,7 @@ import socket         # Used to get IP
 import os             # Command prompt calling and clipping
 from PIL import ImageTk, Image 
 import sys
+import netifaces
                                         
 ########################################
 # Copy to text to clipboard
@@ -62,7 +63,16 @@ def main():
     ########################################
     ip_frame = tk.LabelFrame(window, text="System IPv4:", background="white", font=(fontvar1))      # Creating a white frame inside canvas with label
     ip_frame.place(relwidth=0.3, relheight=0.2, relx=0.15,rely=0.50)               # Defining size/centering and loading into canvas
-    myip = socket.gethostbyname(myhostname)                                       # Get IP address of PC
+    #myip = socket.gethostbyname(myhostname)                                        # Get IP address of PC
+    interface_list = netifaces.interfaces() # Get a list of interface identifiers connected to our machine
+    print(interface_list) #can delete prints if needed
+    addresses = (netifaces.ifaddresses(iface) for iface in interface_list) # Get address of each interface
+    ipv4_address = (address[netifaces.AF_INET] for address in addresses if netifaces.AF_INET in address) # Check each address to make sure it is an IPV4 type
+    print(ipv4_address)
+    ipv4_addresses = [address[0]['addr'] for address in ipv4_address]
+    print(ipv4_addresses)
+    
+    myip = ipv4_addresses[0]  # Array in index 0 seems to be holding vpn IPV4 so set myip to that index
     button2 = tk.Button(ip_frame, text=f"{myip}", font =(fontvar2), command=lambda: onclick(myip))        # Button to easliy copy text into clipboard
     button2.pack()
 
