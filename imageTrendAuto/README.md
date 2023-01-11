@@ -6,13 +6,13 @@ Python script to save files found within emails.
 
 This is a python script to easily retrive ImageTrend CSV file reports. Working 
 with the win32 library, I utilize this library to rapidly go through an outlook
-account and find information found within Image Trend reports to accurately 
+account and find information found within ImageTrend reports to accurately 
 pull CSV files.
 
 ## Usage:
 	
 Run the exe and answer the command prompt guide. Using the exe is an easy way
-to run/managed the program to your liking.
+to run/manage the program to your liking.
 
 ## Developer Notes:
 
