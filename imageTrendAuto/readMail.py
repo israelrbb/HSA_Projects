@@ -54,7 +54,7 @@ def main():
         restricted_date = datetime.today() - timedelta(days=range_date_days)
     print(todays_date)
     print(restricted_date)
- 
+    return
     #########################################################
     # Open Outlook application and go through emails
     #########################################################
@@ -76,36 +76,27 @@ def main():
                 if message.SenderEmailAddress == "noReply@imagetrend.com": # Check if flagged email is actually IMAGE TREND
                     print("Found report")
                     try:
-                        # Current file time
-                        print("Detecting time of file")
-                        fileTime = str(message.SentOn)
-                        fileTime = fileTime.split()[0]
-                        # Get one week span form today
-                        lastweekTime = datetime.today() - timedelta(weeks=1)
-                        lastweekTime = str(lastweekTime)
-                        lastweekTime = lastweekTime.split()[0]                    
-                        # We only want files in the newest span cycle
-                        if fileTime >= lastweekTime:
-                            print(f"Email: {message.subject}")
-                            for attachment in message.Attachments:
-                                if attachment not in filesExplored:
-                                    # Record file already explored
-                                    filesExplored.append(attachment)
-                                    try:
-                                        print(f"File attachment: {attachment}\n")
-                                        print("Adding file to directory...\n")
-                                        # Add attachment to our directory
-                                        attachment.SaveAsFile(os.path.join(outputDir, attachment.FileName))
-                                    except Exception as error:
-                                        print("error when saving the attachment:" + str(error))
-                                else:
-                                    continue
+                        print(message.SentOn)
+                        print(f"Email: {message.subject}")
+                        for attachment in message.Attachments:
+                            if attachment not in filesExplored:
+                                # Record file already explored
+                                filesExplored.append(attachment)
+                                try:
+                                    print(f"File attachment: {attachment}\n")
+                                    print("Adding file to directory...\n")
+                                    # Add attachment to our directory
+                                    attachment.SaveAsFile(os.path.join(outputDir, attachment.FileName))
+                                except Exception as error:
+                                    print("error when saving the attachment:" + str(error))
                             else:
-                                outOfRange+=1
-                                if outOfRange > 10:
-                                    print(f"We are looking too far into the email inbox, I am going to exit us now \n")
-                                    break
                                 continue
+                        else:
+                            outOfRange+=1
+                            if outOfRange > 10:
+                                print(f"We are looking too far into the email inbox, I am going to exit us now \n")
+                                break
+                            continue
                     except Exception as error:
                         print("error when processing emails messages:" + str(error))
             message = messages.GetNext()
